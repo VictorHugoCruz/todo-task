@@ -17,7 +17,7 @@ const todos = [
 
 function App() {
   return (
-    <>
+    <div className="app-container">
       <TodoCounter />
       <TodoSearch />
       <TodoList>
@@ -30,7 +30,7 @@ function App() {
         ))}
       </TodoList>
       <CreateTodoButton />
-    </>
+    </div>
   );
 }
 
