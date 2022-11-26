@@ -1,28 +1,34 @@
 import React from 'react';
 import { AppUI } from './AppUI';
 
-// const defaultTodos = [
-//   { text: 'dar estilos a nuestra app de todos', completed: false},
-//   { text: 'terminar el curso de react', completed: false},
-//   { text: 'Nunca pares de aprender', completed: false},
-//   { text: 'tomar el curso de mongodb', completed: true},
-//   { text: 'tomar el curso de firebase', completed: true},
-//   { text: 'tomar el curso de JavaScrip', completed: true},
+const useLocalStorage = (itemName, initialValue) => {
+  const localStorageItem = localStorage.getItem(itemName);
 
-// ]
-
-function App() {
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-
-  let parsedTodos;
-  if (!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
+  let parsedItem;
+  if (!localStorageItem) {
+    localStorage.setItem('itemName', JSON.stringify(initialValue));
+    parsedItem = initialValue;
   } else {
-    parsedTodos = JSON.parse(localStorage.getItem('TODOS_V1'));
+    parsedItem = JSON.parse(localStorage.getItem(itemName));
+  }
+  const [item, setItem] = React.useState(parsedItem);
+
+  const updateTodos = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    setItem(newItem);
   }
 
-  const [todos, setTodos] = React.useState(parsedTodos);
+  return [
+    item,
+    updateTodos
+  ]
+}
+
+function App() {
+
+
+  const [todos, setTodos] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -40,24 +46,18 @@ function App() {
     })
   }
 
-
-  const updateTodos = (newTodos) => {
-    const stringifiedTodos = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_V1', stringifiedTodos);
-    setTodos(newTodos);
-  }
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     todos[todoIndex].completed = true;
     const newTodos = [...todos];
-    updateTodos(newTodos);
+    setTodos(newTodos);
   }
 
   const deleteTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     todos.splice(todoIndex, 1);
     const newTodos = [...todos];
-    updateTodos(newTodos);
+    setTodos(newTodos);
   }
 
   return (
