@@ -10,6 +10,7 @@
   border: 2px solid #079bc0;
   color: #079bc0;
   background-color: azure;
+  z-index: 100;
 }
 
 .create-todo-button:hover{
