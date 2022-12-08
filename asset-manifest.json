@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/VictorHugoCruz/todo-task/static/css/main.6578bd15.css",
+    "main.js": "/VictorHugoCruz/todo-task/static/js/main.9066c9f7.js",
+    "index.html": "/VictorHugoCruz/todo-task/index.html",
+    "main.6578bd15.css.map": "/VictorHugoCruz/todo-task/static/css/main.6578bd15.css.map",
+    "main.9066c9f7.js.map": "/VictorHugoCruz/todo-task/static/js/main.9066c9f7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6578bd15.css",
+    "static/js/main.9066c9f7.js"
+  ]
+}
