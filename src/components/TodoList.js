@@ -1,11 +1,16 @@
 import '../css/TodoList.css'
 
 
-function TodoList(props){
-  return(
-    <section>
+function TodoList(props) {
+  return (
+    <section className="todo-list-container">
+      {props.error && props.onError()}
+      {props.loading && props.onLoading()}
+
+      {(!props.loading && !props.todosFiltered.length) && props.onEmptyTodos()}
+
       <ul>
-        {props.children}
+        {props.todosFiltered.map(props.render)}
       </ul>
     </section>
   );
